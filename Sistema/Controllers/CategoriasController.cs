@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Sistema.Models;
+using Sistema.UserMethods;
 
 namespace Sistema.Controllers
 {
@@ -19,10 +20,29 @@ namespace Sistema.Controllers
         }
 
         // GET: Categorias
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page
+          )
         {
+            // Declaracion de Variables
+            int pageSize = 10;                   // Cant de Valores a mostrar
+
+            // Condicion Paginacion
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             // Parámetros a ser recibidos en la vista
             ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["DescSortParam"] = (sortOrder == "descr_asc" ? "descr_desc" : "descr_asc");
             ViewData["NombSortParam"] = (String.IsNullOrEmpty(sortOrder) ? "nom_desc" : "");
             
@@ -54,7 +74,7 @@ namespace Sistema.Controllers
             }
 
             // Retorna la lista organizada a la vista
-            return View(await categorias.AsNoTracking().ToListAsync());
+            return View(await Paginacion<Categoria>.CreateAsync(categorias.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Categorias/Details/5

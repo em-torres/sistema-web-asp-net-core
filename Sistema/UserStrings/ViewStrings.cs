@@ -18,10 +18,17 @@ namespace Sistema.UserStrings
         public const string EditEsp = "Editar";
         public const string IndexEsp = "Indice";
         public const string NewEsp = "Nuevo";
+        public const string NextEsp = "Siguiente";
+        public const string PrevEsp = "Anterior";
         public const string SaveEsp = "Guardar";
         public const string SearchEsp = "Buscar";
-        
+        public const string ShownRegEsp = "Registros Mostrados";
+
         // Strings Modelos
         public const string ModCatNombre = "Categoría";
+        public const string ModCatCampNombre = "Nombre";
+        public const string ModCatCampDescripcion = "Descripción";
+        public const string ModCatCampEstado = "Estado";
+
     }
 }
