@@ -19,9 +19,34 @@ namespace Sistema.Controllers
         }
 
         // GET: Categorias
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder /*Parametro para ordenar*/)
         {
-            return View(await _context.Categoria.ToListAsync());
+            // Parámetros a ser recibidos en la vista
+            ViewData["NombSortParam"] = (String.IsNullOrEmpty(sortOrder) ? "nom_desc" : "");
+            ViewData["DescSortParam"] = (sortOrder == "descr_asc" ? "descr_desc" : "descr_asc");
+
+            // Listado de datos desde la BD del contexto/modelo Categoria
+            var categorias = from s in _context.Categoria select s;
+
+            // Condiciones para ordenar
+            switch (sortOrder)
+            {
+                case "nom_desc":
+                    categorias = categorias.OrderByDescending(s => s.Nombre);
+                    break;
+                case "descr_desc":
+                    categorias = categorias.OrderByDescending(s => s.Descripcion);
+                    break;
+                case "descr_asc":
+                    categorias = categorias.OrderBy(s => s.Descripcion);
+                    break;
+                default:
+                    categorias = categorias.OrderBy(s => s.Nombre);
+                    break;
+            }
+
+            // Retorna la lista organizada a la vista
+            return View(await categorias.AsNoTracking().ToListAsync());
         }
 
         // GET: Categorias/Details/5
