@@ -1,13 +1,14 @@
-﻿@model IEnumerable<Sistema.Models.Categoria>
+﻿@using VS = Sistema.UserStrings.ViewStrings;
+@model IEnumerable<Sistema.Models.Categoria>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = VS.IndexEsp;
 }
 
-<h2>Index</h2>
+<h2>Categoría Cursos</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"><button class="btn btn-primary">@VS.NewEsp</button></a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +38,9 @@
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoriaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoriaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoriaID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CategoriaID">@VS.EditEsp</a> |
+                <a asp-action="Details" asp-route-id="@item.CategoriaID">@VS.DetailEsp</a> |
+                <a asp-action="Delete" asp-route-id="@item.CategoriaID">@VS.DeleteEsp</a>
             </td>
         </tr>
 }

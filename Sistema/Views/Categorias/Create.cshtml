@@ -1,12 +1,13 @@
-﻿@model Sistema.Models.Categoria
+﻿@using VS = Sistema.UserStrings.ViewStrings;
+@model Sistema.Models.Categoria
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = VS.CreateEsp;
 }
 
-<h2>Create</h2>
+<h2>@VS.CreateEsp</h2>
 
-<h4>Categoria</h4>
+<h4>@VS.ModCatNombre</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -30,14 +31,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="@VS.CreateEsp" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@VS.BackIndexEsp</a>
 </div>
 
 @section Scripts {
