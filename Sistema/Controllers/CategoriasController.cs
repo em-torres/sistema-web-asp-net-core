@@ -19,14 +19,22 @@ namespace Sistema.Controllers
         }
 
         // GET: Categorias
-        public async Task<IActionResult> Index(string sortOrder /*Parametro para ordenar*/)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             // Parámetros a ser recibidos en la vista
-            ViewData["NombSortParam"] = (String.IsNullOrEmpty(sortOrder) ? "nom_desc" : "");
+            ViewData["CurrentFilter"] = searchString;
             ViewData["DescSortParam"] = (sortOrder == "descr_asc" ? "descr_desc" : "descr_asc");
-
+            ViewData["NombSortParam"] = (String.IsNullOrEmpty(sortOrder) ? "nom_desc" : "");
+            
             // Listado de datos desde la BD del contexto/modelo Categoria
             var categorias = from s in _context.Categoria select s;
+
+            // Filtrado de Datos
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                categorias = categorias.Where(s => s.Nombre.Contains(searchString) ||
+                                                   s.Descripcion.Contains(searchString));
+            }
 
             // Condiciones para ordenar
             switch (sortOrder)

@@ -8,6 +8,7 @@ namespace Sistema.UserStrings
     public class ViewStrings
     {
         // Strings Generales
+        public const string AllRegEsp = "Todos los registros";
         public const string BackIndexEsp = "Regresar al Listado";
         public const string CopyrightEsp = "2019 - Sistema Académico";
         public const string CreateEsp = "Crear";
@@ -18,6 +19,7 @@ namespace Sistema.UserStrings
         public const string IndexEsp = "Indice";
         public const string NewEsp = "Nuevo";
         public const string SaveEsp = "Guardar";
+        public const string SearchEsp = "Buscar";
         
         // Strings Modelos
         public const string ModCatNombre = "Categoría";
